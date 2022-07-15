@@ -16,8 +16,8 @@ try {
   // 挂载
   await $`mount "/dev/disk/by-id/scsi-0Linode_Volume_${vol}" "/mnt/${vol}"`
 } catch (error) {
-  console.log(`Exit code: ${error.exitCode}`)
-  console.log(`Error: ${error.stderr}`)
+  console.error(error);
+  process.exit(1);
 }
 
 // 加入开机启动
@@ -33,6 +33,6 @@ fs.appendFile("/etc/fstab", content, err => {
 await $`mkdir -p /mnt/${vol}/Download && chown ${username} /mnt/${vol}/Download/`
 
 // 修改qb的下载目录
-await $`systemctl stop ${QB_VERSION}@${username}`
+await $`systemctl stop $QB_VERSION@${username}`
 await $`sed -i "s#/home/${username}/Downloads/#/mnt/${vol}/Download/#g" /home/${username}/.config/qBittorrent/qBittorrent.conf`
-await $`systemctl start ${QB_VERSION}@${username}`
+await $`systemctl start $QB_VERSION@${username}`
