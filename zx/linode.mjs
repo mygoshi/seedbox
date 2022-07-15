@@ -1,6 +1,6 @@
 #!/usr/bin/env zx
 import { mkdir } from 'fs'
-import 'zx/globals'
+// import 'zx/globals'
 
 // 配置命令行参数
 const { username, vol } = require('minimist')(process.argv.slice(2), {
