@@ -1,5 +1,4 @@
 #!/usr/bin/env zx
-import { mkdir } from 'fs'
 import 'zx/globals'
 
 // 配置命令行参数
