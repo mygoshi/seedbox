@@ -12,7 +12,7 @@ try {
   // 格式
   await $`mkfs.ext4 "/dev/disk/by-id/scsi-0Linode_Volume_${vol}"`
   // 创建目录
-  mkdir(`/mnt/${vol}`)
+  await $`mkdir /mnt/${vol}`
   // 挂载
   await $`mount "/dev/disk/by-id/scsi-0Linode_Volume_${vol}" "/mnt/${vol}"`
 } catch (error) {
