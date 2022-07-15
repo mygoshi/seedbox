@@ -1,4 +1,5 @@
 #!/usr/bin/env zx
+$.verbose = false
 
 // 获取参数
 let { username, password, port, webport } = argv
