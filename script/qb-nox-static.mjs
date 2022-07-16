@@ -1,13 +1,13 @@
 #!/usr/bin/env zx
-import 'zx/globals'
-const cfonts = require('cfonts');
+// import 'zx/globals'
+// const cfonts = require('cfonts');
+import cfonts from 'cfonts';
 
 // zx setting
 $.verbose = false;
 
 import data from '../data/data.mjs';
 const { qb_list, qb_service, qb_419_conf, qb_438_conf } = data
-// console.log(qb_list);
 
 // 生成图形
 cfonts.say('SeedBox', {
@@ -43,10 +43,48 @@ while (!index || isNaN(index) || index < 1 || index > qb_list.length) {
   });
   index = await question(chalk.yellowBright('请根据序号选择qb版本: '))
 }
-const qb_version = qb_list[index]
+const qb_version = qb_list[index - 1]
 console.log(chalk.red(`即将安装 ${qb_version}...`));
 
 // 拉取qb文件
 await $`wget -O "/usr/bin/${qb_version}" "https://github.com/Shutu736/pt/raw/master/qb-nox/${qb_version}"`
 await $`chmod +x "/usr/bin/${qb_version}"`
 
+// 写入service
+fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version), err => {
+  if (err) {
+    console.log(chalk.bold.red(err))
+    process.exit(1)
+  }
+})
+
+// 建立目录
+await $`mkdir -p /home/${username}/Downloads && chown ${username} /home/${username}/Downloads`
+await $`mkdir -p /home/${username}/.config/qBittorrent && chown ${username} /home/${username}/.config/qBittorrent`
+
+// 创建qb服务
+await $`systemctl start ${qb_version}@${username}`
+await $`systemctl enable ${qb_version}@${username}`
+await $`systemctl stop ${qb_version}@${username}`
+
+if (qb_version.indexOf('419') != -1) {
+  let md5password = await $`echo -n ${password} | md5sum | awk '{print $1}'`
+  fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_419_conf(username, md5password, port, webport), err => {
+    if (err) {
+      console.log(chalk.bold.red(err))
+      process.exit(1)
+    }
+  })
+} else {
+  await $`cd /home/${username} && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x /home/${username}/qb_password_gen`
+  let PBKDF2password = await $`/home/${username}/qb_password_gen ${password}`
+  fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_438_conf(username, PBKDF2password, port, webport), err => {
+    if (err) {
+      console.log(chalk.bold.red(err))
+      process.exit(1)
+    }
+  })
+  await $`/home/${username}/qb_password_gen`
+}
+
+await $`systemctl start ${qb_version}@${username}`

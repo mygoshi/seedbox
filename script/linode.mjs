@@ -18,7 +18,7 @@ try {
   // 挂载
   await $`mount "/dev/disk/by-id/scsi-0Linode_Volume_${vol}" "/mnt/${vol}"`
 } catch (error) {
-  console.error(error);
+  console.log(chalk.bold.red(error))
   process.exit(1);
 }
 
@@ -26,7 +26,7 @@ try {
 const content = `/dev/disk/by-id/scsi-0Linode_Volume_${vol} /mnt/${vol} ext4 defaults,noatime,nofail 0 2`;
 fs.appendFile("/etc/fstab", content, err => {
   if (err) {
-    console.error(err)
+    console.log(chalk.bold.red(err))
     process.exit(1)
   }
 })
