@@ -5,7 +5,6 @@ const qb_list = [
   'qb-nox-static-419-lt1114-12g',
   'qb-nox-static-419-lt1114-oracle',
   'qb-nox-static-438-lt1214',
-  'qb-nox-static-438-lt1214-ln',
   'qb-nox-static-439-lt1215'
 ];
 
