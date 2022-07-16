@@ -69,6 +69,7 @@ await $`systemctl stop ${qb_version}@${username}`
 // 根据版本写入默认配置文件
 if (qb_version.indexOf('419') != -1) {
   let md5password = await $`echo -n ${password} | md5sum | awk '{print $1}'`
+  md5password = md5password.replace(/\r|\n/ig, "")
   fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_419_conf(username, md5password, port, webport), err => {
     if (err) {
       console.log(chalk.bold.red(err))
@@ -78,6 +79,7 @@ if (qb_version.indexOf('419') != -1) {
 } else {
   await $`cd /home/${username} && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x /home/${username}/qb_password_gen`
   let PBKDF2password = await $`/home/${username}/qb_password_gen ${password}`
+  PBKDF2password = (PBKDF2password.toString()).replace(/\r|\n/ig, "")
   fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_438_conf(username, PBKDF2password.toString(), port, webport), err => {
     if (err) {
       console.log(chalk.bold.red(err))
