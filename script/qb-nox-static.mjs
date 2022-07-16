@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 // import 'zx/globals'
-// const cfonts = require('cfonts');
-import cfonts from 'cfonts';
+const cfonts = require('cfonts');
+// import cfonts from 'cfonts';
 
 // zx setting
 $.verbose = false;
@@ -61,7 +61,8 @@ fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version
 // 建立目录
 await $`mkdir -p /home/${username}/Downloads && chown ${username} /home/${username}/Downloads`
 await $`mkdir -p /home/${username}/.config/qBittorrent && chown ${username} /home/${username}/.config/qBittorrent`
-
+console.log(`${qb_version}@${username}`);
+process.exit(1)
 // 创建qb服务
 await $`systemctl start ${qb_version}@${username}`
 await $`systemctl enable ${qb_version}@${username}`
