@@ -62,6 +62,7 @@ await $`mkdir -p /home/${username}/Downloads && chown ${username} /home/${userna
 await $`mkdir -p /home/${username}/.config/qBittorrent && chown ${username} /home/${username}/.config/qBittorrent`
 
 // 创建qb服务
+await $`systemctl daemon-reload`
 await $`systemctl start ${qb_version}@${username}`
 await $`systemctl enable ${qb_version}@${username}`
 await $`systemctl stop ${qb_version}@${username}`
