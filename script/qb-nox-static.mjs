@@ -1,7 +1,6 @@
 #!/usr/bin/env zx
 // import 'zx/globals'
 const cfonts = require('cfonts');
-// import cfonts from 'cfonts';
 
 // zx setting
 $.verbose = false;
@@ -47,7 +46,7 @@ const qb_version = qb_list[index - 1]
 console.log(chalk.red(`即将安装 ${qb_version}...`));
 
 // 拉取qb文件
-await $`wget -O "/usr/bin/${qb_version}" "https://github.com/shutu777/seedbox/raw/main/qb-nox/${qb_version}"`
+await $`wget -O "/usr/bin/${qb_version}" "./qb-nox/${qb_version}"`
 await $`chmod +x "/usr/bin/${qb_version}"`
 
 // 写入service
@@ -61,8 +60,7 @@ fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version
 // 建立目录
 await $`mkdir -p /home/${username}/Downloads && chown ${username} /home/${username}/Downloads`
 await $`mkdir -p /home/${username}/.config/qBittorrent && chown ${username} /home/${username}/.config/qBittorrent`
-console.log(`${qb_version}@${username}`);
-process.exit(1)
+
 // 创建qb服务
 await $`systemctl start ${qb_version}@${username}`
 await $`systemctl enable ${qb_version}@${username}`
