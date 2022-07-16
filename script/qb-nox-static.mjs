@@ -9,21 +9,25 @@ import data from '../data/data.mjs';
 const { qb_list, qb_service, qb_419_conf, qb_438_conf } = data
 
 // 生成图形
-cfonts.say('SeedBox', {
-  font: 'block',              // define the font face
-  align: 'left',              // define text alignment
-  background: 'transparent',  // define the background color, you can also use `backgroundColor` here as key
-  letterSpacing: 1,           // define letter spacing
-  lineHeight: 1,              // define the line height
-  space: true,                // define if the output text should have empty lines on top and on the bottom
-  maxLength: '0',             // define how many character can be on one line
-  gradient: '#b92b27,#1565C0',// define your two gradient colors
-  independentGradient: false, // define if you want to recalculate the gradient for each new line
-  transitionGradient: true,  // define if this is a transition between colors directly
-  env: 'node'                 // define the environment cfonts is being executed in
-});
+const logo = () => {
+  await $`clear`
+  cfonts.say('SeedBox', {
+    font: 'block',              // define the font face
+    align: 'left',              // define text alignment
+    background: 'transparent',  // define the background color, you can also use `backgroundColor` here as key
+    letterSpacing: 1,           // define letter spacing
+    lineHeight: 1,              // define the line height
+    space: true,                // define if the output text should have empty lines on top and on the bottom
+    maxLength: '0',             // define how many character can be on one line
+    gradient: '#b92b27,#1565C0',// define your two gradient colors
+    independentGradient: false, // define if you want to recalculate the gradient for each new line
+    transitionGradient: true,  // define if this is a transition between colors directly
+    env: 'node'                 // define the environment cfonts is being executed in
+  });
+}
 
 // 配置命令行参数
+logo()
 const { username, password, port, webport } = require('minimist')(process.argv.slice(2), {
   string: ['username', 'password', 'port', 'webport'],
   default: { port: 28888, webport: 8080 }
@@ -50,7 +54,7 @@ await $`wget -O "/usr/bin/${qb_version}" "https://github.com/shutu777/seedbox/ra
 await $`chmod +x "/usr/bin/${qb_version}"`
 
 // 写入service
-await fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version), err => {
+fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version), err => {
   if (err) {
     console.log(chalk.bold.red(err))
     process.exit(1)
@@ -70,7 +74,7 @@ await $`systemctl stop ${qb_version}@${username}`
 if (qb_version.indexOf('419') != -1) {
   let md5password = await $`echo -n ${password} | md5sum | awk '{print $1}'`
   md5password = md5password.toString().replace(/\r|\n/ig, "")
-  await fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_419_conf(username, md5password, port, webport), err => {
+  fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_419_conf(username, md5password, port, webport), err => {
     if (err) {
       console.log(chalk.bold.red(err))
       process.exit(1)
@@ -80,7 +84,7 @@ if (qb_version.indexOf('419') != -1) {
   await $`cd /home/${username} && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x /home/${username}/qb_password_gen`
   let PBKDF2password = await $`/home/${username}/qb_password_gen ${password}`
   PBKDF2password = PBKDF2password.toString().replace(/\r|\n/ig, "")
-  await fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_438_conf(username, PBKDF2password.toString(), port, webport), err => {
+  fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_438_conf(username, PBKDF2password.toString(), port, webport), err => {
     if (err) {
       console.log(chalk.bold.red(err))
       process.exit(1)
