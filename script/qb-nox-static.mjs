@@ -84,7 +84,7 @@ if (qb_version.indexOf('419') != -1) {
       process.exit(1)
     }
   })
-  await $`/home/${username}/qb_password_gen`
+  await $`rm /home/${username}/qb_password_gen`
 }
 
 // 启动qb
