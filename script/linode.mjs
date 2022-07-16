@@ -1,6 +1,9 @@
 #!/usr/bin/env zx
 import 'zx/globals'
 
+// zx setting
+$.verbose = false;
+
 // 配置命令行参数
 const { username, vol } = require('minimist')(process.argv.slice(2), {
   string: ['username', 'vol'],
