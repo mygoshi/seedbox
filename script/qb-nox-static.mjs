@@ -1,9 +1,9 @@
 #!/usr/bin/env zx
 // import 'zx/globals'
-const cfonts = require('cfonts');
+import cfonts from 'cfonts';
 
 // zx setting
-$.verbose = false;
+$.verbose = true;
 
 import data from '../data/data.mjs';
 const { qb_list, qb_service, qb_419_conf, qb_438_conf } = data
@@ -50,7 +50,7 @@ await $`wget -O "/usr/bin/${qb_version}" "https://github.com/shutu777/seedbox/ra
 await $`chmod +x "/usr/bin/${qb_version}"`
 
 // 写入service
-fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version), err => {
+await fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version), err => {
   if (err) {
     console.log(chalk.bold.red(err))
     process.exit(1)
@@ -62,7 +62,6 @@ await $`mkdir -p /home/${username}/Downloads && chown ${username} /home/${userna
 await $`mkdir -p /home/${username}/.config/qBittorrent && chown ${username} /home/${username}/.config/qBittorrent`
 
 // 创建qb服务
-await $`systemctl daemon-reload`
 await $`systemctl start ${qb_version}@${username}`
 await $`systemctl enable ${qb_version}@${username}`
 await $`systemctl stop ${qb_version}@${username}`
@@ -70,8 +69,8 @@ await $`systemctl stop ${qb_version}@${username}`
 // 根据版本写入默认配置文件
 if (qb_version.indexOf('419') != -1) {
   let md5password = await $`echo -n ${password} | md5sum | awk '{print $1}'`
-  md5password = md5password.replace(/\r|\n/ig, "")
-  fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_419_conf(username, md5password, port, webport), err => {
+  md5password = md5password.toString().replace(/\r|\n/ig, "")
+  await fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_419_conf(username, md5password, port, webport), err => {
     if (err) {
       console.log(chalk.bold.red(err))
       process.exit(1)
@@ -80,13 +79,14 @@ if (qb_version.indexOf('419') != -1) {
 } else {
   await $`cd /home/${username} && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x /home/${username}/qb_password_gen`
   let PBKDF2password = await $`/home/${username}/qb_password_gen ${password}`
-  PBKDF2password = (PBKDF2password.toString()).replace(/\r|\n/ig, "")
-  fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_438_conf(username, PBKDF2password.toString(), port, webport), err => {
+  PBKDF2password = PBKDF2password.toString().replace(/\r|\n/ig, "")
+  await fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_438_conf(username, PBKDF2password.toString(), port, webport), err => {
     if (err) {
       console.log(chalk.bold.red(err))
       process.exit(1)
     }
   })
+  console.log();
   await $`rm /home/${username}/qb_password_gen`
 }
 

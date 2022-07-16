@@ -60,6 +60,7 @@ WebUI\CSRFProtection=false`
 })
 
 const qb_438_conf = ((username, PBKDF2password, port, webport) => {
+  console.log(PBKDF2password);
   return `[LegalNotice]
 Accepted=true
 [Network]
