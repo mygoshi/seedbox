@@ -1,12 +1,11 @@
 #!/usr/bin/env zx
 // import 'zx/globals'
 import cfonts from 'cfonts';
+import data from '../data/data.mjs';
+const { qb_list, qb_service, qb_419_conf, qb_438_conf } = data
 
 // zx setting
 $.verbose = true;
-
-import data from '../data/data.mjs';
-const { qb_list, qb_service, qb_419_conf, qb_438_conf } = data
 
 // 生成图形
 await $`clear`
@@ -82,13 +81,13 @@ if (qb_version.indexOf('419') != -1) {
   await $`cd /home/${username} && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x /home/${username}/qb_password_gen`
   let PBKDF2password = await $`/home/${username}/qb_password_gen ${password}`
   PBKDF2password = PBKDF2password.toString().replace(/\r|\n/ig, "")
+  console.log(qb_438_conf(username, PBKDF2password.toString(), port, webport));
   fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_438_conf(username, PBKDF2password.toString(), port, webport), err => {
     if (err) {
       console.log(chalk.bold.red(err))
       process.exit(1)
     }
   })
-  console.log();
   await $`rm /home/${username}/qb_password_gen`
 }
 

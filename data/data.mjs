@@ -47,34 +47,33 @@ Accepted=true
 [Network]
 Cookies=@Invalid()
 [Preferences]
-Connection\PortRangeMin=${port}
-General\Locale=zh
-General\UseRandomPort=false
-Downloads\SavePath=/home/${username}/Downloads/
-Queueing\QueueingEnabled=false
-WebUI\Password_ha1=@ByteArray(${md5password})
-WebUI\Port=${webport}
-WebUI\Username=${username}
-WebUI\CSRFProtection=false`
+Connection\\PortRangeMin=${port}
+General\\Locale=zh
+General\\UseRandomPort=false
+Downloads\\SavePath=/home/${username}/Downloads/
+Queueing\\QueueingEnabled=false
+WebUI\\Password_ha1=@ByteArray(${md5password})
+WebUI\\Port=${webport}
+WebUI\\Username=${username}
+WebUI\\CSRFProtection=false`
 })
 
 const qb_438_conf = ((username, PBKDF2password, port, webport) => {
-  console.log(PBKDF2password);
   return `[LegalNotice]
 Accepted=true
 [Network]
 Cookies=@Invalid()
 [Preferences]
-Connection\PortRangeMin=${port}
-General\Locale=zh
-General\UseRandomPort=false
-Downloads\PreAllocation=false
-Downloads\SavePath=/home/${username}/Downloads/
-Queueing\QueueingEnabled=false
-WebUI\Password_PBKDF2="@ByteArray(${PBKDF2password})"
-WebUI\Port=${webport}
-WebUI\Username=${username}
-WebUI\CSRFProtection=false`
+Connection\\PortRangeMin=${port}
+General\\Locale=zh
+General\\UseRandomPort=false
+Downloads\\PreAllocation=false
+Downloads\\SavePath=/home/${username}/Downloads/
+Queueing\\QueueingEnabled=false
+WebUI\\Password_PBKDF2="@ByteArray(${PBKDF2password})"
+WebUI\\Port=${webport}
+WebUI\\Username=${username}
+WebUI\\CSRFProtection=false`
 })
 
 const data = {
