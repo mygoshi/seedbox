@@ -52,6 +52,7 @@ await $`wget -O "/usr/bin/${qb_version}" "https://github.com/shutu777/seedbox/ra
 await $`chmod +x "/usr/bin/${qb_version}"`
 
 // 写入service
+console.log(chalk.bold.bgGreenBright("---------------------创建qb服务---------------------"));
 fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version), err => {
   if (err) {
     console.log(chalk.bold.red(err))
@@ -60,15 +61,18 @@ fs.writeFile(`/etc/systemd/system/${qb_version}@.service`, qb_service(qb_version
 })
 
 // 建立目录
+console.log(chalk.bold.bgGreenBright("---------------------创建qb目录---------------------"));
 await $`mkdir -p /home/${username}/Downloads && chown ${username} /home/${username}/Downloads`
 await $`mkdir -p /home/${username}/.config/qBittorrent && chown ${username} /home/${username}/.config/qBittorrent`
 
 // 创建qb服务
+console.log(chalk.bold.bgGreenBright("---------------------qb开机自启---------------------"));
 await $`systemctl start ${qb_version}@${username}`
 await $`systemctl enable ${qb_version}@${username}`
 await $`systemctl stop ${qb_version}@${username}`
 
 // 根据版本写入默认配置文件
+console.log(chalk.bold.bgGreenBright("---------------------qb默认配置---------------------"));
 if (qb_version.indexOf('419') != -1) {
   let md5password = await $`echo -n ${password} | md5sum | awk '{print $1}'`
   md5password = md5password.toString().replace(/\r|\n/ig, "")
@@ -92,6 +96,7 @@ if (qb_version.indexOf('419') != -1) {
 }
 
 // 配置环境变量
+console.log(chalk.bold.bgGreenBright("---------------------qb环境变量---------------------"));
 const content = `export QB_VERSION=${qb_version}
 export USERNAME=${username}`
 fs.appendFile('/etc/profile', content, err => {
@@ -103,4 +108,5 @@ fs.appendFile('/etc/profile', content, err => {
 await $`source /etc/profile`
 
 // 启动qb
+console.log(chalk.bold.bgGreenBright("---------------------qb安装成功---------------------"));
 await $`systemctl start ${qb_version}@${username}`
