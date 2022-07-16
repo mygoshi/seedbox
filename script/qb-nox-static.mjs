@@ -47,7 +47,7 @@ const qb_version = qb_list[index - 1]
 console.log(chalk.red(`即将安装 ${qb_version}...`));
 
 // 拉取qb文件
-await $`wget -O "/usr/bin/${qb_version}" "https://github.com/Shutu736/pt/raw/master/qb-nox/${qb_version}"`
+await $`wget -O "/usr/bin/${qb_version}" "https://github.com/shutu777/seedbox/raw/main/qb-nox/${qb_version}"`
 await $`chmod +x "/usr/bin/${qb_version}"`
 
 // 写入service
@@ -67,6 +67,7 @@ await $`systemctl start ${qb_version}@${username}`
 await $`systemctl enable ${qb_version}@${username}`
 await $`systemctl stop ${qb_version}@${username}`
 
+// 根据版本写入默认配置文件
 if (qb_version.indexOf('419') != -1) {
   let md5password = await $`echo -n ${password} | md5sum | awk '{print $1}'`
   fs.writeFile(`/home/${username}/.config/qBittorrent/qBittorrent.conf`, qb_419_conf(username, md5password, port, webport), err => {
@@ -87,4 +88,5 @@ if (qb_version.indexOf('419') != -1) {
   await $`/home/${username}/qb_password_gen`
 }
 
+// 启动qb
 await $`systemctl start ${qb_version}@${username}`
