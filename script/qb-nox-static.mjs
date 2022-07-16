@@ -46,7 +46,7 @@ const qb_version = qb_list[index - 1]
 console.log(chalk.red(`即将安装 ${qb_version}...`));
 
 // 拉取qb文件
-await $`wget -O "/usr/bin/${qb_version}" ./qb-nox/${qb_version}`
+await $`wget -O "/usr/bin/${qb_version}" "https://github.com/shutu777/seedbox/raw/main/qb-nox/${qb_version}"`
 await $`chmod +x "/usr/bin/${qb_version}"`
 
 // 写入service
