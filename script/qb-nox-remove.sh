@@ -21,7 +21,7 @@ fi
 
 if [[ -f "/usr/bin/qb-nox-static-438-lt1214-ln" ]]; then
   # 4.3.8
-  echo -e "\033[36m ================= 删除qb-nox 4.3.8 ================= \033[0m"
+  echo -e "\033[36m ================= 删除qb-nox 4.3.8 ln ================= \033[0m"
   systemctl stop qb-nox-static-438-lt1214-ln@$username
   rm -rf /etc/systemd/system/qb-nox-static-438-lt1214-ln@.service
   rm -rf /usr/bin/qb-nox-static-438-lt1214-ln
