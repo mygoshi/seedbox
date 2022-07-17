@@ -2,7 +2,7 @@
 // import 'zx/globals'
 
 // zx setting
-$.verbose = true;
+$.verbose = false;
 
 console.log(chalk.bold.bgGreenBright("---------------------删除qb核心文件---------------------"));
 const qb_version = await $`echo $QB_VERSION`
