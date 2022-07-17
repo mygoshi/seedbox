@@ -76,12 +76,39 @@ WebUI\\Username=${username}
 WebUI\\CSRFProtection=false`
 })
 
+const nginx_conf = (() => {
+  return `server {  
+      listen  80;
+      server_name domain.com;
+        
+      rewrite ^(.*)$  https://$host$1 permanent; 
+  }
+  server {
+      listen 443 ssl;
+      server_name domain.com;
+      index index.html index.htm;
+      ssl_certificate /etc/nginx/ssl/fullchain.cer;
+      ssl_certificate_key /etc/nginx/ssl/domain.com.key;
+      ssl_session_timeout 5m;
+      ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # TLS
+      ssl_session_cache builtin:1000 shared:SSL:10m;
+      error_page 404 /404.html;
+      location / {
+          proxy_pass http://127.0.0.1:webport/;
+          proxy_http_version       1.1;
+          proxy_set_header         X-Forwarded-Host        $http_host;
+          http2_push_preload on; # Enable http2 push
+      }
+  }`
+})
+
 const data = {
   qb_list,
   fileBrowser,
   qb_service,
   qb_419_conf,
-  qb_438_conf
+  qb_438_conf,
+  nginx_conf
 }
 
 export default data

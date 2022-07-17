@@ -1,3 +1,6 @@
+import data from './data.mjs';
+const { nginx_conf } = data
+
 // 添加用户
 export async function create_user(username, password) {
   console.log(chalk.bold.bgGreenBright("---------------------创建新用户---------------------"));
@@ -28,6 +31,7 @@ export async function qb_install(username, password, port, webport) {
 
 // 安装证书反代
 export async function nginx_install(email, domain, dns_type, dns_id, dns_key, dns_secret) {
+  console.log(chalk.bold.bgGreenBright("---------------------安装证书反代---------------------"));
   // 安装nginx
   await $`apt-get install nginx -y`
   // 安装acme
@@ -51,4 +55,16 @@ export async function nginx_install(email, domain, dns_type, dns_id, dns_key, dn
     --key-file /etc/nginx/ssl/${domain}.key \\
     --fullchain-file /etc/nginx/ssl/fullchain.cer \\
     --reloadcmd "service nginx force-reload"`
+  // 写入默认配置文件
+  await fs.writeFile('/etc/nginx/conf.d/${domain}.conf', nginx_conf(), err => {
+    if (err) {
+      console.log(chalk.bold.red(err))
+      process.exit(1)
+    }
+  })
+  // 替换域名端口
+  await $`sed -i "s/domain.com/${domain}/g" /etc/nginx/conf.d/${domain}.conf`
+  await $`sed -i "s/webport/${webport}/g" /etc/nginx/conf.d/${domain}.conf`
+  // 重启nginx
+  await $`nginx -s reload`
 }
