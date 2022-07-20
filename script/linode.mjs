@@ -2,7 +2,7 @@
 // import 'zx/globals'
 
 // zx setting
-// $.verbose = false;
+$.verbose = false;
 
 // 配置命令行参数
 const { username, vol, api_token, linode_id, size } = require('minimist')(process.argv.slice(2), {
@@ -53,6 +53,7 @@ const body = {
   "linode_id": linode_id
 }
 // 发起请求
+$.verbose = true;
 const res = await fetch(url, {
   method: 'post',
   body: JSON.stringify(body),
@@ -60,6 +61,7 @@ const res = await fetch(url, {
 });
 // 成功状态回调
 if (res.status == 200) {
+  $.verbose = false;
   within(async () => {
     cd('~')
 
