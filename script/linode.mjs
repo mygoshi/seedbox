@@ -61,7 +61,6 @@ const res = await fetch(url, {
 });
 // 成功状态回调
 if (res.status == 200) {
-  $.verbose = false;
   console.log(200);
   setTimeout(async () => {
     addVol(vol, username)
