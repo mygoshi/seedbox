@@ -10,7 +10,7 @@ const { username, vol, api_token, linode_id, size } = require('minimist')(proces
 })
 
 // 生成图形
-await $`cfonts "Shutu" --gradient "#b92b27","#1565C0" --transition-gradient`
+await $`cfonts "SeedBox" --gradient "#b92b27","#1565C0" --transition-gradient`
 
 async function addVol(label, filesystem_path, username) {
   console.log('addVol');
