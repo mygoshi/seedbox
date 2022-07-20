@@ -10,22 +10,7 @@ const { username, vol, api_token, linode_id, size } = require('minimist')(proces
   default: { vol: 'vol', size: 1024 }
 })
 
-// 请求地址
-const url = "https://api.linode.com/v4/volumes"
-// 参数
-const body = {
-  "label": vol,
-  "size": size,
-  "linode_id": linode_id
-}
-// 发起请求
-const res = await fetch(url, {
-  method: 'post',
-  body: JSON.stringify(body),
-  headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${api_token}"` }
-});
-// 成功状态回调
-if (res.status == 200) {
+const addVol = async((vol, username) => {
   try {
     // 格式
     await $`mkfs.ext4 "/dev/disk/by-id/scsi-0Linode_Volume_${vol}"`
@@ -54,4 +39,29 @@ if (res.status == 200) {
   await $`systemctl stop $QB_VERSION@${username}`
   await $`sed -i "s#/home/${username}/Downloads/#/mnt/${vol}/Download/#g" /home/${username}/.config/qBittorrent/qBittorrent.conf`
   await $`systemctl start $QB_VERSION@${username}`
+})
+
+// 请求地址
+const url = "https://api.linode.com/v4/volumes"
+// 参数
+const body = {
+  "label": vol,
+  "size": size,
+  "linode_id": linode_id
+}
+// 发起请求
+const res = await fetch(url, {
+  method: 'post',
+  body: JSON.stringify(body),
+  headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${api_token}` }
+});
+// 成功状态回调
+if (res.status == 200) {
+  within(async () => {
+    cd('~')
+
+    setTimeout(async () => {
+      await addVol(vol, username)
+    }, 2000)
+  })
 } 
