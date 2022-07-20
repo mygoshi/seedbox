@@ -56,5 +56,10 @@ const res = await fetch(url, {
 // 成功状态回调
 if (res.status == 200) {
   const { label, filesystem_path } = await res.json();
-  await addVol(label, filesystem_path, username)
+  setInterval(() => {
+    fs.pathExists(filesystem_path)
+      .then(exists => {
+        await addVol(label, filesystem_path, username)
+      })
+  }, 1000);
 } 
