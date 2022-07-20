@@ -59,7 +59,9 @@ if (res.status == 200) {
   setInterval(() => {
     fs.pathExists(filesystem_path)
       .then(exists => {
-        await addVol(label, filesystem_path, username)
+        if (exists) {
+          addVol(label, filesystem_path, username)
+        }
       })
   }, 1000);
 } 
