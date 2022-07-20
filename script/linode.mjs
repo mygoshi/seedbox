@@ -2,7 +2,6 @@
 // import 'zx/globals'
 
 // zx setting
-$.verbose = false;
 
 // 配置命令行参数
 const { username, vol, api_token, linode_id, size } = require('minimist')(process.argv.slice(2), {
@@ -63,8 +62,6 @@ const res = await fetch(url, {
 if (res.status == 200) {
   $.verbose = false;
   within(async () => {
-    cd('~')
-
     setTimeout(async () => {
       addVol(vol, username)
     }, 2000)
