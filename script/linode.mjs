@@ -10,6 +10,9 @@ const { username, vol, api_token, linode_id, size } = require('minimist')(proces
   default: { vol: 'vol', size: 1024 }
 })
 
+// 生成图形
+await $`cfonts "Shutu" --gradient "#b92b27","#1565C0" --transition-gradient`
+
 async function addVol(vol, username) {
   try {
     // 格式
