@@ -10,7 +10,7 @@ const { username, vol, api_token, linode_id, size } = require('minimist')(proces
   default: { vol: 'vol', size: 1024 }
 })
 
-const addVol = async((vol, username) => {
+const addVol = ((vol, username) => {
   try {
     // 格式
     await $`mkfs.ext4 "/dev/disk/by-id/scsi-0Linode_Volume_${vol}"`
