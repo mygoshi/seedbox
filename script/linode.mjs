@@ -47,7 +47,6 @@ const body = {
   "linode_id": linode_id
 }
 // 发起请求
-$.verbose = false;
 const res = await fetch(url, {
   method: 'post',
   body: JSON.stringify(body),
