@@ -13,6 +13,7 @@ const { username, vol, api_token, linode_id, size } = require('minimist')(proces
 await $`cfonts "Shutu" --gradient "#b92b27","#1565C0" --transition-gradient`
 
 async function addVol(vol, username) {
+  console.log('addVol');
   try {
     // 格式
     await $`mkfs.ext4 "/dev/disk/by-id/scsi-0Linode_Volume_${vol}"`
@@ -61,7 +62,8 @@ const res = await fetch(url, {
 // 成功状态回调
 if (res.status == 200) {
   $.verbose = false;
+  console.log(200);
   setTimeout(async () => {
     addVol(vol, username)
-  }, 2000)
+  }, 3500)
 } 
