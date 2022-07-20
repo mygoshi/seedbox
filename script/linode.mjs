@@ -61,7 +61,7 @@ const res = await fetch(url, {
 });
 // 成功状态回调
 if (res.status == 200) {
-  const data = await response.json();
+  const data = await res.json();
   console.log(data);
   setTimeout(async () => {
     addVol(vol, username)
