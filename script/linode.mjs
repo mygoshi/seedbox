@@ -1,5 +1,5 @@
 #!/usr/bin/env zx
-import 'zx/globals'
+// import 'zx/globals'
 
 // zx setting
 $.verbose = false;
