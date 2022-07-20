@@ -47,7 +47,7 @@ const body = {
   "linode_id": linode_id
 }
 // 发起请求
-$.verbose = true;
+$.verbose = false;
 const res = await fetch(url, {
   method: 'post',
   body: JSON.stringify(body),
@@ -56,11 +56,12 @@ const res = await fetch(url, {
 // 成功状态回调
 if (res.status == 200) {
   const { label, filesystem_path } = await res.json();
-  setInterval(() => {
+  const timer = setInterval(() => {
     fs.pathExists(filesystem_path)
       .then(exists => {
         if (exists) {
           addVol(label, filesystem_path, username)
+          clearInterval(timer)
         }
       })
   }, 1000);
