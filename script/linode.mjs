@@ -12,22 +12,22 @@ const { username, vol, api_token, linode_id, size } = require('minimist')(proces
 // 生成图形
 await $`cfonts "Shutu" --gradient "#b92b27","#1565C0" --transition-gradient`
 
-async function addVol(label, file_path, username) {
+async function addVol(label, filesystem_path, username) {
   console.log('addVol');
   try {
     // 格式
-    await $`mkfs.ext4 ${file_path}`
+    await $`mkfs.ext4 ${filesystem_path}`
     // 创建目录
     await $`mkdir /mnt/${label}`
     // 挂载
-    await $`mount ${file_path} "/mnt/${label}"`
+    await $`mount ${filesystem_path} "/mnt/${label}"`
   } catch (error) {
     console.log(chalk.bold.red(error))
     process.exit(1);
   }
 
   // 加入开机启动
-  const content = `${file_path} /mnt/${label} ext4 defaults,noatime,nofail 0 2`;
+  const content = `${filesystem_path} /mnt/${label} ext4 defaults,noatime,nofail 0 2`;
   fs.appendFile("/etc/fstab", content, err => {
     if (err) {
       console.log(chalk.bold.red(err))
@@ -61,6 +61,6 @@ const res = await fetch(url, {
 });
 // 成功状态回调
 if (res.status == 200) {
-  const { label, file_path } = await res.json();
-  await addVol(label, file_path, username)
+  const { label, filesystem_path } = await res.json();
+  await addVol(label, filesystem_path, username)
 } 
