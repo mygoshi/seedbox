@@ -10,7 +10,7 @@ const { username, vol, api_token, linode_id, size } = require('minimist')(proces
   default: { vol: 'vol', size: 1024 }
 })
 
-async function addVol((vol, username) {
+async function addVol(vol, username) {
   try {
     // 格式
     await $`mkfs.ext4 "/dev/disk/by-id/scsi-0Linode_Volume_${vol}"`
@@ -61,7 +61,7 @@ if (res.status == 200) {
     cd('~')
 
     setTimeout(async () => {
-      await addVol(vol, username)
+      addVol(vol, username)
     }, 2000)
   })
 } 
