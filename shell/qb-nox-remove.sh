@@ -67,18 +67,6 @@ if [[ -f "/usr/bin/qb-nox-static-419-lt1114-ax41" ]]; then
   rm -rf /home/$username/.cache/qBittorrent/
 fi
 
-if [[ -f "/usr/bin/qb-nox-static-419-lt1114-ln" ]]; then
-  # 4.1.9
-  echo -e "\033[36m ================= 删除qb-nox 4.1.9 ================= \033[0m"
-  systemctl stop qb-nox-static-419-lt1114-ln@$username
-  rm -rf /etc/systemd/system/qb-nox-static-419-lt1114-ln@.service
-  rm -rf /usr/bin/qb-nox-static-419-lt1114-ln
-  systemctl disable qb-nox-static-419-lt1114-ln@$username
-  rm -rf /home/$username/.config/qBittorrent/
-  rm -rf /home/$username/.local/
-  rm -rf /home/$username/.cache/qBittorrent/
-fi
-
 if [[ -f "/usr/bin/qb-nox-static-419-lt1114-linode" ]]; then
   # 4.1.9
   echo -e "\033[36m ================= 删除qb-nox 4.1.9 ================= \033[0m"
@@ -91,13 +79,13 @@ if [[ -f "/usr/bin/qb-nox-static-419-lt1114-linode" ]]; then
   rm -rf /home/$username/.cache/qBittorrent/
 fi
 
-if [[ -f "/usr/bin/qb-nox-static-419-lt1114-12g" ]]; then
+if [[ -f "/usr/bin/qb-nox-static-419-lt1114-lw" ]]; then
   # 4.1.9
   echo -e "\033[36m ================= 删除qb-nox 4.1.9 ================= \033[0m"
-  systemctl stop qb-nox-static-419-lt1114-12g@$username
-  rm -rf /etc/systemd/system/qb-nox-static-419-lt1114-12g@.service
-  rm -rf /usr/bin/qb-nox-static-419-lt1114-12g
-  systemctl disable qb-nox-static-419-lt1114-12g@$username
+  systemctl stop qb-nox-static-419-lt1114-lw@$username
+  rm -rf /etc/systemd/system/qb-nox-static-419-lt1114-lw@.service
+  rm -rf /usr/bin/qb-nox-static-419-lt1114-lw
+  systemctl disable qb-nox-static-419-lt1114-lw@$username
   rm -rf /home/$username/.config/qBittorrent/
   rm -rf /home/$username/.local/
   rm -rf /home/$username/.cache/qBittorrent/
@@ -110,18 +98,6 @@ if [[ -f "/usr/bin/qb-nox-static-419-lt1114-oracle" ]]; then
   rm -rf /etc/systemd/system/qb-nox-static-419-lt1114-oracle@.service
   rm -rf /usr/bin/qb-nox-static-419-lt1114-oracle
   systemctl disable qb-nox-static-419-lt1114-oracle@$username
-  rm -rf /home/$username/.config/qBittorrent/
-  rm -rf /home/$username/.local/
-  rm -rf /home/$username/.cache/qBittorrent/
-fi
-
-if [[ -f "/usr/bin/qb-nox-static-419-lt1114-oracle2" ]]; then
-  # 4.1.9
-  echo -e "\033[36m ================= 删除qb-nox 4.1.9 ================= \033[0m"
-  systemctl stop qb-nox-static-419-lt1114-oracle2@$username
-  rm -rf /etc/systemd/system/qb-nox-static-419-lt1114-oracle2@.service
-  rm -rf /usr/bin/qb-nox-static-419-lt1114-oracle2
-  systemctl disable qb-nox-static-419-lt1114-oracle2@$username
   rm -rf /home/$username/.config/qBittorrent/
   rm -rf /home/$username/.local/
   rm -rf /home/$username/.cache/qBittorrent/
