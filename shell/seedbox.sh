@@ -111,6 +111,11 @@ if [ "${versions[$num]}" == "qb-nox-static-419-lt1114-linode" ] || [ "${versions
   systemctl restart vnstat
 fi
 
+if [ "${versions[$num]}" == "qb-nox-static-419-lt1114-netcup" ]; then
+  sed -i "s/MaxBandwidth 1000/MaxBandwidth 3000/g" /etc/vnstat.conf
+  systemctl restart vnstat
+fi
+
 echo "export QB_VERSION=${versions[$num]}
 export USERNAME=$username" >> /etc/profile
 source /etc/profile
