@@ -48,7 +48,9 @@ nginx_install $domain $webport $dns_type $dns_id $dns_key $dns_secret
 # vnstat
 vnstat_update ${versions[$num]}
 
-
+# 杰佬优化
+bbrx_install
+boot_script
 
 echo -e "\033[36m ================= 安装成功 ================= \033[0m"
 if [ $domain ]; then
