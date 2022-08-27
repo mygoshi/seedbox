@@ -94,9 +94,6 @@ function vnstat_update() {
 
 function bbrx_install() {
   echo -e "\033[36m ================= 杰佬 Tweaked BBR Install ================= \033[0m"
-  tput sgr0; clear
-
-  ## Load text color settings
   source <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Miscellaneous/tput.sh)
   source <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/tweaking.sh)
   apt-get -qqy install sudo

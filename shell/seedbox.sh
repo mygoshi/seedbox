@@ -52,7 +52,7 @@ vnstat_update ${versions[$num]}
 bbrx_install
 boot_script
 
-history -c;clear
+history -c;
 
 echo -e "\033[36m ================= 安装成功 ================= \033[0m"
 if [ $domain ]; then
