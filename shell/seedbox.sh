@@ -49,9 +49,7 @@ nginx_install $domain $webport $dns_type $dns_id $dns_key $dns_secret
 vnstat_update ${versions[$num]}
 
 # 杰佬优化
-source <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/tweaking.sh)
 bbrx_install
-system_tuning
 boot_script
 
 history -c;clear
