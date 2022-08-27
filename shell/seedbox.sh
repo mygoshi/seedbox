@@ -63,5 +63,5 @@ fi
 echo -e "\033[35m qb版本: ${versions[$num]} \033[0m"
 echo -e "\033[35m 用户名: $username \033[0m"
 echo -e "\033[35m 密码: $password \033[0m"
-echo -e "\033[35m 请输入 reboot 重启机器，然后输入 ls_mod | grep bbr 直到有bbrx的时候再次重启 \033[0m"
+echo -e "\033[35m 请输入 reboot 重启机器，然后输入 lsmod | grep bbr 直到有bbrx的时候再次重启 \033[0m"
 echo -e "\033[36m =========================================== \033[0m"
