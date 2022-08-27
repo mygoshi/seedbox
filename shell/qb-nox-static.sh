@@ -36,6 +36,7 @@ echo -ne "install \033[35m${versions[$num]}\033[0m , press Ctrl + C to exit."
 read
 
 wget -O "/usr/bin/${versions[$num]}" "https://github.com/shutu777/seedbox/raw/main/qb-nox/${versions[$num]}" && chmod +x "/usr/bin/${versions[$num]}"
+mv /usr/bin/${versions[$num]} /usr/bin/qbittorrent-nox
 qb_version=${versions[$num]}
 
 echo "[Unit]
@@ -47,21 +48,21 @@ After=network-online.target nss-lookup.target
 User=%I
 Type=simple
 LimitNOFILE=100000
-ExecStart=/usr/bin/${versions[$num]}
+ExecStart=/usr/bin/qbittorrent-nox
 Restart=on-failure
 TimeoutStopSec=20
 RestartSec=10
 
 [Install]
-WantedBy=multi-user.target" >/etc/systemd/system/${versions[$num]}@.service
+WantedBy=multi-user.target" >/etc/systemd/system/qbittorrent-nox@.service
 
 mkdir -p /home/$username/Downloads && chown $username /home/$username/Downloads
 mkdir -p /home/$username/.config/qBittorrent && chown $username /home/$username/.config/qBittorrent
 
-systemctl start ${versions[$num]}@$username
-systemctl enable ${versions[$num]}@$username
+systemctl start qbittorrent-nox@$username
+systemctl enable qbittorrent-nox@$username
 
-systemctl stop ${versions[$num]}@$username
+systemctl stop qbittorrent-nox@$username
 
 if [[ "${versions[$num]}" =~ "qb-nox-static-419-lt1114" ]]; then
   
@@ -105,4 +106,4 @@ WebUI\CSRFProtection=false
 EOF
   rm /home/$username/qb_password_gen
 fi
-systemctl start ${versions[$num]}@$username
+systemctl start qbittorrent-nox@$username
