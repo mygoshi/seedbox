@@ -16,7 +16,7 @@ if [ ! $webport ]; then
   webport=8080
 fi
 if [ ! $port ]; then
-  webport=28888
+  port=$(($RANDOM+30000))
 fi
 
 versions[0]=qb-nox-static-419-lt1114
