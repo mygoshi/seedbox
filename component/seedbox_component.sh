@@ -91,3 +91,23 @@ function vnstat_update() {
     systemctl restart vnstat
   fi
 }
+
+function bbrx_install() {
+  clear
+  echo -e "\033[36m ================= 杰佬 Tweaked BBR Install ================= \033[0m"
+  source <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/tweaking.sh)
+  CPU_Tweaking
+  NIC_Tweaking
+  Network_Other_Tweaking
+  Scheduler_Tweaking
+  file_open_limit_Tweaking
+  kernel_Tweaking
+  Decision Tweaked_BBR
+}
+
+function boot_script() {
+  clear
+  echo -e "\033[36m ================= 杰佬 boot-script ================= \033[0m"
+  source <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Miscellaneous/boot-script.sh)
+  boot_script
+}

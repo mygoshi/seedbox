@@ -48,6 +48,8 @@ nginx_install $domain $webport $dns_type $dns_id $dns_key $dns_secret
 # vnstat
 vnstat_update ${versions[$num]}
 
+
+
 echo -e "\033[36m ================= 安装成功 ================= \033[0m"
 if [ $domain ]; then
   echo -e "\033[35m 网址: https://$domain/ \033[0m"
@@ -57,4 +59,5 @@ fi
 echo -e "\033[35m qb版本: ${versions[$num]} \033[0m"
 echo -e "\033[35m 用户名: $username \033[0m"
 echo -e "\033[35m 密码: $password \033[0m"
+echo -e "\033[35m 请输入 reboot 重启机器，然后输入 ls_mod | grep bbr 直到有bbrx的时候再次重启 \033[0m"
 echo -e "\033[36m =========================================== \033[0m"
