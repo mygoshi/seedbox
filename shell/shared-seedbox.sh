@@ -1,8 +1,8 @@
 #! /bin/bash
 # Author:               Shutu
-# Version:              1.0
+# Version:              1.1
 # Mail:                 shutu736@gmail.com
-# Date:                 2022-2-11
+# Date:                 2022-8-27
 # Description:          饭盒qb一键脚本
 
 # options

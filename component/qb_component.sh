@@ -1,6 +1,6 @@
 #! /bin/bash
 # Author:               Shutu
-# Version:              1.0
+# Version:              1.1
 # Mail:                 shutu736@gmail.com
 # Date:                 2022-8-27
 # Description:          qb辅助函数

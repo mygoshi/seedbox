@@ -1,8 +1,8 @@
 #! /bin/bash
 # Author:               Shutu
-# Version:              1.0
+# Version:              1.1
 # Mail:                 shutu736@gmail.com
-# Date:                 2022-2-6
+# Date:                 2022-8-27
 # Description:          FBE 荒野无灯一键安装
 
 curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
