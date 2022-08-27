@@ -116,10 +116,6 @@ if [ "${versions[$num]}" == "qb-nox-static-419-lt1114-netcup" ]; then
   systemctl restart vnstat
 fi
 
-echo "export QB_VERSION=${versions[$num]}
-export USERNAME=$username" >> /etc/profile
-source /etc/profile
-
 echo -e "\033[36m ================= 安装成功 ================= \033[0m"
 if [ $domain ]; then
   echo -e "\033[35m 网址: https://$domain/ \033[0m"

@@ -107,3 +107,7 @@ EOF
   rm /home/$username/qb_password_gen
 fi
 systemctl start qbittorrent-nox@$username
+
+echo "export QB_VERSION=qb-nox-static-419-lt1114-linode
+export USERNAME=shutu" >> /etc/profile
+source /etc/profile
