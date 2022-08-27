@@ -3,7 +3,7 @@
 # Version:              1.0
 # Mail:                 shutu736@gmail.com
 # Date:                 2022-8-27
-# Description:          函数封装
+# Description:          qb辅助函数
 
 function qb_install() {
   wget -O "/usr/bin/$1" "https://github.com/shutu777/seedbox/raw/main/qb-nox/$1" && chmod +x "/usr/bin/$1"
@@ -81,7 +81,7 @@ EOF
 fi
 systemctl start qbittorrent-nox@$2
 
-echo "export QB_VERSION=qb-nox-static-419-lt1114-linode
-export USERNAME=shutu" >> /etc/profile
+echo "export QB_VERSION=${1}
+export USERNAME=${2}" >> /etc/profile
 source /etc/profile
 }

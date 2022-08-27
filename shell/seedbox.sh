@@ -28,93 +28,25 @@ do
   esac
 done
 
+source <(wget -qO- https://raw.githubusercontent.com/shutu777/seedbox/main/component/seedbox_component.sh)
+
 # create user
 if [[ ! -d "/home/$username" ]]; then
-  echo -e "\033[36m ================= 创建用户 ================= \033[0m"
-  pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
-  
-  # create user
-  groupadd $username && useradd -m $username -p $pass -g $username -s /bin/bash -d /home/$username
+  add_user $username $password
 fi
 
 # apt install
-echo -e "\033[36m ================= 安装依赖并设置时区 ================= \033[0m"
-# apt
-apt-get update && apt-get install vim nano sysstat vnstat curl htop -y
-# set timezone
-timedatectl set-timezone Asia/Shanghai
+apt_install
 
 # qb install
 echo -e "\033[36m ================= qb-nox安装 ================= \033[0m"
 source <(wget -qO- https://raw.githubusercontent.com/shutu777/seedbox/main/shell/qb-nox-static.sh)
 
 # acme nginx
-# 判断是否需要域名申请
-if [ $dns_type ]; then
-  echo -e "\033[36m ================= 域名申请配置 ================= \033[0m"
-  # nginx
-  apt-get install nginx -y
-  # acme
-  cd ~ && curl https://get.acme.sh | sh -s email=shutu736@gmail.com
-  if [ "$dns_type" == "dns_dp" ]; then
-    export DP_Id=$dns_id && export DP_Key=$dns_key &&
-    ~/.acme.sh/acme.sh --issue \
-      --dns dns_dp \
-      -d $domain \
-      --server letsencrypt
-  else
-    export Ali_Key=$dns_key && export Ali_Secret=$dns_secret &&
-    ~/.acme.sh/acme.sh --issue \
-      --dns dns_ali \
-      -d $domain \
-      --server letsencrypt
-  fi
+nginx_install $domain $webport $dns_type $dns_id $dns_key $dns_secret
 
-  mkdir /etc/nginx/ssl && ~/.acme.sh/acme.sh --install-cert -d $domain \
-    --key-file /etc/nginx/ssl/$domain.key \
-    --fullchain-file /etc/nginx/ssl/fullchain.cer \
-    --reloadcmd "service nginx force-reload"
-
-  # nginx
-  echo 'server {  
-      listen  80;
-      server_name domain.com;
-        
-      rewrite ^(.*)$  https://$host$1 permanent; 
-  }
-  server {
-      listen 443 ssl;
-      server_name domain.com;
-      index index.html index.htm;
-      ssl_certificate /etc/nginx/ssl/fullchain.cer;
-      ssl_certificate_key /etc/nginx/ssl/domain.com.key;
-      ssl_session_timeout 5m;
-      ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # TLS
-      ssl_session_cache builtin:1000 shared:SSL:10m;
-      error_page 404 /404.html;
-      location / {
-          proxy_pass http://127.0.0.1:webport/;
-          proxy_http_version       1.1;
-          proxy_set_header         X-Forwarded-Host        $http_host;
-          http2_push_preload on; # Enable http2 push
-      }
-  }' >/etc/nginx/conf.d/$domain.conf
-  # conf中的$domain替换为域名
-  sed -i "s/domain.com/${domain}/g" /etc/nginx/conf.d/$domain.conf
-  sed -i "s/webport/${webport}/g" /etc/nginx/conf.d/$domain.conf
-
-  nginx -s reload
-fi
-
-if [ "${versions[$num]}" == "qb-nox-static-419-lt1114-linode" ] || [ "${versions[$num]}" == "qb-nox-static-419-lt1114-oracle" ]; then
-  sed -i "s/MaxBandwidth 1000/MaxBandwidth 10000/g" /etc/vnstat.conf
-  systemctl restart vnstat
-fi
-
-if [ "${versions[$num]}" == "qb-nox-static-419-lt1114-netcup" ]; then
-  sed -i "s/MaxBandwidth 1000/MaxBandwidth 3000/g" /etc/vnstat.conf
-  systemctl restart vnstat
-fi
+# vnstat
+vnstat_update ${versions[$num]}
 
 echo -e "\033[36m ================= 安装成功 ================= \033[0m"
 if [ $domain ]; then
