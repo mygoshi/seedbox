@@ -84,7 +84,7 @@ systemctl start qbittorrent-nox@$2
 
 echo "export QB_VERSION=${1}
 export USERNAME=${2}" >> /etc/profile
-source /etc/profile
+. /etc/profile
 }
 
 function qb_restart() {

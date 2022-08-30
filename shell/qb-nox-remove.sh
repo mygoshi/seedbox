@@ -19,6 +19,6 @@ if [[ -f "/usr/bin/qbittorrent-nox" ]]; then
 
   sed -i "/QB_VERSION/d" /etc/profile
   sed -i "/USERNAME/d" /etc/profile
-  source /etc/profile
+  . /etc/profile
   echo -e "\033[36m ================= 删除成功 ================= \033[0m"
 fi

@@ -28,7 +28,7 @@ do
   esac
 done
 
-source <(wget -qO- https://raw.githubusercontent.com/shutu777/seedbox/main/component/seedbox_component.sh)
+. <(wget -qO- https://raw.githubusercontent.com/shutu777/seedbox/main/component/seedbox_component.sh)
 
 # create user
 if [[ ! -d "/home/$username" ]]; then
@@ -40,7 +40,7 @@ apt_install
 
 # qb install
 echo -e "\033[36m ================= qb-nox安装 ================= \033[0m"
-source <(wget -qO- https://raw.githubusercontent.com/shutu777/seedbox/main/shell/qb-nox-static.sh)
+. <(wget -qO- https://raw.githubusercontent.com/shutu777/seedbox/main/shell/qb-nox-static.sh)
 
 # acme nginx
 nginx_install $domain $webport $dns_type $dns_id $dns_key $dns_secret

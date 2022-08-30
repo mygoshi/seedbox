@@ -94,8 +94,8 @@ function vnstat_update() {
 
 function bbrx_install() {
   echo -e "\033[36m ================= 杰佬 Tweaked BBR Install ================= \033[0m"
-  source <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Miscellaneous/tput.sh)
-  source <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/tweaking.sh)
+  . <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Miscellaneous/tput.sh)
+  . <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/tweaking.sh)
   apt-get -qqy install sudo
   Tweaked_BBR
   CPU_Tweaking; NIC_Tweaking; Network_Other_Tweaking; Scheduler_Tweaking; kernel_Tweaking;
@@ -103,6 +103,6 @@ function bbrx_install() {
 
 function boot_script() {
   echo -e "\033[36m ================= 杰佬 boot-script ================= \033[0m"
-  source <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Miscellaneous/boot-script.sh)
+  . <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Miscellaneous/boot-script.sh)
   boot_script
 }
