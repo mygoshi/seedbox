@@ -39,3 +39,4 @@ source <(wget -qO- https://raw.githubusercontent.com/shutu777/seedbox/main/compo
 qb_install ${versions[$num]} $username
 
 qb_config ${versions[$num]} $username $password $webport $port
+qb_restart $username
