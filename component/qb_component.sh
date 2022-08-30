@@ -90,7 +90,7 @@ source /etc/profile
 function qb_restart() {
   cat << EOF >/home/$1/qb_restart.sh
 rm -rf /home/$1/Downloads/*
-rm -rf /home/$1/.local/share
+rm -rf /home/$1/.local/share/data/qBittorrent/BT_backup/*
 EOF
   chmod +x /home/$1/qb_restart.sh
 }
