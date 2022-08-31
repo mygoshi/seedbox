@@ -20,7 +20,6 @@ function qb_install() {
   Type=simple
   LimitNOFILE=100000
   ExecStart=/usr/bin/qbittorrent-nox
-  ExecReload=/home/$2/qb_restart.sh
   Restart=on-failure
   TimeoutStopSec=20
   RestartSec=10
