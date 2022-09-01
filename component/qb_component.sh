@@ -20,6 +20,7 @@ function qb_install() {
   Type=simple
   LimitNOFILE=100000
   ExecStart=/usr/bin/qbittorrent-nox
+  ExecReload=/home/$2/qb_restart.sh
   Restart=on-failure
   TimeoutStopSec=20
   RestartSec=10
@@ -90,6 +91,7 @@ function qb_restart() {
   cat << EOF >/home/$1/qb_restart.sh
 rm -rf /home/$1/Downloads/*
 rm -rf /home/$1/.local/share/data/qBittorrent/BT_backup/*
+systemctl restart qbittorrent-nox@$1.service
 EOF
   chmod +x /home/$1/qb_restart.sh
 }
