@@ -21,10 +21,12 @@ fi
 versions[0]=qb-nox-static-419-lt1114
 versions[1]=qb-nox-static-419-lt1114-ax41
 versions[2]=qb-nox-static-419-lt1114-linode
-versions[3]=qb-nox-static-419-lt1114-netcup
-versions[4]=qb-nox-static-419-lt1114-oracle
-versions[5]=qb-nox-static-419-lt1114-leaseweb
-j=6
+versions[3]=qb-nox-static-419-lt1114-netcup-rs1000
+versions[4]=qb-nox-static-419-lt1114-netcup-rs2000
+versions[5]=qb-nox-static-419-lt1114-netcup-rs4000
+versions[6]=qb-nox-static-419-lt1114-oracle
+versions[7]=qb-nox-static-419-lt1114-leaseweb
+j=8
 
 for ((i = 0; i < j; i++)); do
   echo -e "\033[35m ${i}) ${versions[$i]}\033[0m"

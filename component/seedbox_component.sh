@@ -81,12 +81,12 @@ fi
 }
 
 function vnstat_update() {
-  if [ "$1" == "qb-nox-static-419-lt1114-linode" ] || [ "$1" == "qb-nox-static-419-lt1114-oracle" ]; then
+  if [ "$1" =~ "linode" ] || [ "$1" == "oracle" ]; then
     sed -i "s/MaxBandwidth 1000/MaxBandwidth 10000/g" /etc/vnstat.conf
     systemctl restart vnstat
   fi
 
-  if [ "$1" == "qb-nox-static-419-lt1114-netcup" ]; then
+  if [ "$1" =~ "netcup" ]; then
     sed -i "s/MaxBandwidth 1000/MaxBandwidth 3000/g" /etc/vnstat.conf
     systemctl restart vnstat
   fi
