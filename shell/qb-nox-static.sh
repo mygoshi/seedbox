@@ -25,9 +25,10 @@ versions[3]=qb-nox-static-419-lt1114-netcup-rs1000
 versions[4]=qb-nox-static-419-lt1114-netcup-rs2000
 versions[5]=qb-nox-static-419-lt1114-netcup-rs4000
 versions[6]=qb-nox-static-419-lt1114-oracle
-versions[7]=qb-nox-static-419-lt1114-leaseweb
-versions[8]=qb-nox-static-419-lt1114-hzc
-j=9
+versions[7]=qb-nox-static-438-lt1214-oracle
+versions[8]=qb-nox-static-419-lt1114-leaseweb
+versions[9]=qb-nox-static-419-lt1114-hzc
+j=10
 
 for ((i = 0; i < j; i++)); do
   echo -e "\033[35m ${i}) ${versions[$i]}\033[0m"
