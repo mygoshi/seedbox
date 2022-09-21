@@ -36,6 +36,11 @@ function qb_install() {
 }
 
 function qb_config() {
+  echo $1
+  echo $2
+  echo $3
+  echo $4
+  echo $5
   systemctl stop qbittorrent-nox@$2
 
   if [[ "$1" =~ "qb-nox-static-41" ]]; then
@@ -56,8 +61,9 @@ WebUI\Port=$4
 WebUI\Username=$2
 WebUI\CSRFProtection=false
 EOF
-  elif [[ "${version}" =~ "qb-nox-static-43" ]]; then
+  elif [[ "$1" =~ "qb-nox-static-43" ]]; then
     cd /home/$2 && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x /home/$2/qb_password_gen
+    PBKDF2password=$($HOME/qb_password_gen $password)
     PBKDF2password=$(/home/$2/qb_password_gen $3)
     cat << EOF >/home/$2/.config/qBittorrent/qBittorrent.conf
 [LegalNotice]
