@@ -82,7 +82,7 @@ EOF
 
 echo "export QB_VERSION=$1
 export USERNAME=$2" >> /etc/profile
-    . /etc/profile
+. /etc/profile
 }
 
 function qb_restart() {
