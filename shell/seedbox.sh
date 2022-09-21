@@ -49,8 +49,8 @@ nginx_install $domain $webport $dns_type $dns_id $dns_key $dns_secret
 vnstat_update ${versions[$num]}
 
 # 杰佬优化
-bbrx_install
-boot_script
+# bbrx_install
+# boot_script
 
 history -c
 

@@ -45,4 +45,4 @@ read
 qb_install ${versions[$num]} $username
 
 qb_config ${versions[$num]} $username $password $webport $port
-qb_restart $username
+# qb_restart $username
