@@ -38,7 +38,7 @@ function qb_install() {
 function qb_config() {
   systemctl stop qbittorrent-nox@$2
 
-if [[ "$1" =~ "qb-nox-static-419-lt1114" ]]; then
+if [[ "$1" =~ "qb-nox-static-41" ]]; then
   
 
   md5password=$(echo -n $3 | md5sum | awk '{print $1}')
