@@ -38,11 +38,9 @@ function qb_install() {
 function qb_config() {
   systemctl stop qbittorrent-nox@$2
 
-if [[ "$1" =~ "qb-nox-static-41" ]]; then
-  
-
-  md5password=$(echo -n $3 | md5sum | awk '{print $1}')
-  cat << EOF >/home/$2/.config/qBittorrent/qBittorrent.conf
+  if [[ "$1" =~ "qb-nox-static-41" ]]; then
+    md5password=$(echo -n $3 | md5sum | awk '{print $1}')
+    cat << EOF >/home/$2/.config/qBittorrent/qBittorrent.conf
 [LegalNotice]
 Accepted=true
 [Network]
@@ -58,10 +56,10 @@ WebUI\Port=$4
 WebUI\Username=$2
 WebUI\CSRFProtection=false
 EOF
-else
-  cd /home/$2 && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x /home/$2/qb_password_gen
-  PBKDF2password=$(/home/$2/qb_password_gen $3)
-  cat << EOF >/home/$2/.config/qBittorrent/qBittorrent.conf
+  elif [[ "${version}" =~ "qb-nox-static-43" ]]; then
+    cd /home/$2 && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x /home/$2/qb_password_gen
+    PBKDF2password=$(/home/$2/qb_password_gen $3)
+    cat << EOF >/home/$2/.config/qBittorrent/qBittorrent.conf
 [LegalNotice]
 Accepted=true
 [Network]
@@ -78,13 +76,13 @@ WebUI\Port=$4
 WebUI\Username=$2
 WebUI\CSRFProtection=false
 EOF
-  rm /home/$2/qb_password_gen
-fi
-systemctl start qbittorrent-nox@$2
+    rm /home/$2/qb_password_gen
+    fi
+    systemctl start qbittorrent-nox@$2
 
-echo "export QB_VERSION=${1}
+    echo "export QB_VERSION=${1}
 export USERNAME=${2}" >> /etc/profile
-. /etc/profile
+    . /etc/profile
 }
 
 function qb_restart() {
