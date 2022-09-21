@@ -36,11 +36,6 @@ function qb_install() {
 }
 
 function qb_config() {
-  echo $1
-  echo $2
-  echo $3
-  echo $4
-  echo $5
   systemctl stop qbittorrent-nox@$2
 
   if [[ "$1" =~ "qb-nox-static-41" ]]; then
@@ -85,8 +80,8 @@ EOF
     fi
     systemctl start qbittorrent-nox@$2
 
-    echo "export QB_VERSION=${1}
-export USERNAME=${2}" >> /etc/profile
+echo "export QB_VERSION=$1
+export USERNAME=$2" >> /etc/profile
     . /etc/profile
 }
 
