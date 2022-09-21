@@ -18,17 +18,19 @@ if [ ! $port ]; then
   port=$(($RANDOM+30000))
 fi
 
-versions[0]=qb-nox-static-419-lt1114
-versions[1]=qb-nox-static-419-lt1114-ax41
-versions[2]=qb-nox-static-419-lt1114-linode
-versions[3]=qb-nox-static-419-lt1114-netcup-rs1000
-versions[4]=qb-nox-static-419-lt1114-netcup-rs2000
-versions[5]=qb-nox-static-419-lt1114-netcup-rs4000
-versions[6]=qb-nox-static-419-lt1114-oracle
-versions[7]=qb-nox-static-438-lt1214-oracle
-versions[8]=qb-nox-static-419-lt1114-leaseweb
-versions[9]=qb-nox-static-419-lt1114-hzc
-j=10
+
+versions[0]=qb-nox-static-419-lt1114-linode
+versions[1]=qb-nox-static-438-lt1214-linode
+versions[2]=qb-nox-static-419-lt1114-oracle
+versions[3]=qb-nox-static-438-lt1214-oracle
+versions[4]=qb-nox-static-419-lt1114-netcup-rs1000
+versions[5]=qb-nox-static-419-lt1114-netcup-rs2000
+versions[6]=qb-nox-static-419-lt1114-netcup-rs4000
+versions[7]=qb-nox-static-419-lt1114
+versions[8]=qb-nox-static-419-lt1114-ax41
+versions[9]=qb-nox-static-419-lt1114-leaseweb
+versions[10]=qb-nox-static-419-lt1114-hzc
+j=11
 
 for ((i = 0; i < j; i++)); do
   echo -e "\033[35m ${i}) ${versions[$i]}\033[0m"
