@@ -84,12 +84,3 @@ echo "export QB_VERSION=$1
 export USERNAME=$2" >> /etc/profile
 . /etc/profile
 }
-
-function qb_restart() {
-  cat << EOF >/home/$1/qb_restart.sh
-rm -rf /home/$1/Downloads/*
-rm -rf /home/$1/.local/share/data/qBittorrent/BT_backup/*
-systemctl restart qbittorrent-nox@$1.service
-EOF
-  chmod +x /home/$1/qb_restart.sh
-}
