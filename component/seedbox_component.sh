@@ -95,8 +95,10 @@ function bbrx_install() {
   . <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Miscellaneous/tput.sh)
   . <(wget -qO- https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/tweaking.sh)
   apt-get -qqy install sudo
-  Tweaked_BBR
+  cd ~
   CPU_Tweaking; NIC_Tweaking; Network_Other_Tweaking; Scheduler_Tweaking; kernel_Tweaking;
+  Tweaked_BBR
+  systemctl start bbrinstall.service
 }
 
 function boot_script() {
