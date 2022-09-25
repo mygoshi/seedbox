@@ -13,6 +13,7 @@ if [[ -f "/usr/bin/qbittorrent-nox" ]]; then
   rm -rf /etc/systemd/system/qbittorrent-nox@.service
   rm -rf /usr/bin/qbittorrent-nox
   systemctl disable qbittorrent-nox@$username
+  rm -rf /home/$usernmae/Download/*
   rm -rf /home/$username/.config/qBittorrent/
   rm -rf /home/$username/.local/share/
   rm -rf /home/$username/.cache/qBittorrent/
