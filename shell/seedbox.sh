@@ -51,6 +51,7 @@ vnstat_update ${versions[$num]}
 # 杰佬优化
 bbrx_install
 boot_script
+bbrx_start
 
 history -c
 
