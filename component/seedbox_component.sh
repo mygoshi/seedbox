@@ -98,7 +98,6 @@ function bbrx_install() {
   cd ~
   CPU_Tweaking; NIC_Tweaking; Network_Other_Tweaking; Scheduler_Tweaking; kernel_Tweaking;
   Tweaked_BBR
-  systemctl start bbrinstall.service
 }
 
 function boot_script() {
