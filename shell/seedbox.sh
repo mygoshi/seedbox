@@ -66,5 +66,3 @@ echo -e "\033[35m 用户名: $username \033[0m"
 echo -e "\033[35m 密码: $password \033[0m"
 echo -e "\033[35m 请输入 lsmod | grep bbr 查看是否有bbrx \033[0m"
 echo -e "\033[36m =========================================== \033[0m"
-
-reboot
