@@ -21,7 +21,7 @@ chmod +x ~/bin/qbittorrent-nox
 
 mkdir -p ~/.config/qBittorrent
 cd ~ && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x ~/qb_password_gen
-PBKDF2password=$(~/$username/qb_password_gen $password)
+PBKDF2password=$(~/qb_password_gen $password)
   cat << EOF >~/.config/qBittorrent/qBittorrent.conf
 [LegalNotice]
 Accepted=true
@@ -32,7 +32,7 @@ Connection\PortRangeMin=$port
 General\Locale=zh
 General\UseRandomPort=false
 Downloads\PreAllocation=false
-Downloads\SavePath=/home/$username/Downloads/
+Downloads\SavePath=private/qBittorrent/data
 Queueing\QueueingEnabled=false
 WebUI\Password_PBKDF2="@ByteArray($PBKDF2password)"
 WebUI\Port=$webport
