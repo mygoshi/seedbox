@@ -21,15 +21,23 @@ do
   esac
 done
 
+if [ ! $webport ]; then
+  webport=8080
+fi
+if [ ! $port ]; then
+  port=$(($RANDOM+30000))
+fi
+
 mkdir -p ~/bin
 mkdir -p ~/private/qBittorrent/data
-wget https://github.com/Shutu736/pt/raw/master/qb-nox/qb-nox-static-419-lt1114-fh
-mv qb-nox-static-419-lt1114-fh qbittorrent-nox
+wget https://github.com/shutu777/seedbox/raw/main/qb-nox/qb-nox-static-438-lt1214-oracle
+mv qb-nox-static-438-lt1214-oracle qbittorrent-nox
 mv qbittorrent-nox ~/bin/
 chmod +x ~/bin/qbittorrent-nox
 
 mkdir -p ~/.config/qBittorrent
-md5password=$(echo -n $password | md5sum | awk '{print $1}')
+cd ~ && wget https://raw.githubusercontent.com/jerry048/Seedbox-Components/main/Torrent%20Clients/qBittorrent/qb_password_gen && chmod +x ~/qb_password_gen
+PBKDF2password=$(~/$username/qb_password_gen $password)
   cat << EOF >~/.config/qBittorrent/qBittorrent.conf
 [LegalNotice]
 Accepted=true
@@ -39,9 +47,10 @@ Cookies=@Invalid()
 Connection\PortRangeMin=$port
 General\Locale=zh
 General\UseRandomPort=false
-Downloads\SavePath=private/qBittorrent/data
+Downloads\PreAllocation=false
+Downloads\SavePath=/home/$username/Downloads/
 Queueing\QueueingEnabled=false
-WebUI\Password_ha1=@ByteArray($md5password)
+WebUI\Password_PBKDF2="@ByteArray($PBKDF2password)"
 WebUI\Port=$webport
 WebUI\Username=$username
 WebUI\CSRFProtection=false
