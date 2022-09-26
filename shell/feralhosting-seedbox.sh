@@ -39,6 +39,7 @@ WebUI\Port=$webport
 WebUI\Username=$username
 WebUI\CSRFProtection=false
 EOF
+sed -i "s|Port=8080|Port=12297|g" ~/.config/qBittorrent/qBittorrent.conf
 screen -dmS qBittorrent ~/bin/qbittorrent-nox
 pgrep -fu "$(whoami)" "qbittorrent-nox"
 echo "当前域名登录地址 http://$(whoami).$(hostname -f):$(sed -rn 's|WebUI\\Port=||p' ~/.config/qBittorrent/qBittorrent.conf)"
