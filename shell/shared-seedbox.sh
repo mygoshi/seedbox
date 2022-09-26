@@ -5,28 +5,12 @@
 # Date:                 2022-8-27
 # Description:          饭盒qb一键脚本
 
-# options
-args=`getopt -o u:p:w:x: -al username:,password:,webport:,port: -n 'shared-seedbox.sh' -- "$@"`
-eval set -- "$args"
+username=$1
+password=$2
 
-while [ -n "$1" ]
-do
-  case "$1" in
-    -u|--username) username=$2; shift 2;;
-    -p|--password) password=$2; shift 2;;
-    -w|--webport) webport=$2; shift 2;;
-    -x|--port) port=$2; shift 2;;
-    --) shift ; break ;;
-    *) echo "getopt error!"; break ;;
-  esac
-done
+webport=8080
+port=$(($RANDOM+30000))
 
-if [ ! $webport ]; then
-  webport=8080
-fi
-if [ ! $port ]; then
-  port=$(($RANDOM+30000))
-fi
 
 mkdir -p ~/bin
 mkdir -p ~/private/qBittorrent/data
