@@ -19,9 +19,7 @@ if [ ! $port ]; then
 fi
 
 
-versions=('qb-nox-static-419-lt1114-linode' 
-'qb-nox-static-438-lt1214-linode' 
-'qb-nox-static-419-lt1114-oracle' 
+versions=('qb-nox-static-438-lt1214-linode' 
 'qb-nox-static-438-lt1214-oracle' 
 'qb-nox-static-419-lt1114-netcup-rs1000' 
 'qb-nox-static-419-lt1114-netcup-rs2000' 
