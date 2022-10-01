@@ -6,7 +6,7 @@
 # Description:          qb辅助函数
 
 function qb_install() {
-  wget -O "/usr/bin/$1" "https://github.com/shutu777/seedbox/raw/main/qb-nox/$1" && chmod +x "/usr/bin/$1"
+  wget -O "/usr/bin/$1" "https://code.shutu.me/shutu/seedbox/raw/branch/main/qb-nox/$1" && chmod +x "/usr/bin/$1"
   mv /usr/bin/$1 /usr/bin/qbittorrent-nox
   qb_version=$1
 

@@ -14,7 +14,7 @@ port=$(($RANDOM+30000))
 
 mkdir -p ~/bin
 mkdir -p ~/private/qBittorrent/data
-wget https://github.com/shutu777/seedbox/raw/main/qb-nox/qb-nox-static-438-lt1214-oracle
+wget https://code.shutu.me/shutu/seedbox/raw/branch/main/qb-nox/qb-nox-static-438-lt1214-oracle
 mv qb-nox-static-438-lt1214-oracle qbittorrent-nox
 mv qbittorrent-nox ~/bin/
 chmod +x ~/bin/qbittorrent-nox

@@ -38,7 +38,7 @@ read num
 echo -ne "install \033[35m${versions[$num]}\033[0m , press Ctrl + C to exit."
 read
 
-. <(wget -qO- https://raw.githubusercontent.com/shutu777/seedbox/main/component/qb_component.sh)
+. <(wget -qO- https://code.shutu.me/shutu/seedbox/raw/branch/main/component/qb_component.sh)
 
 qb_install ${versions[$num]} $username
 
