@@ -49,11 +49,8 @@ nginx_install $domain $webport $dns_type $dns_id $dns_key $dns_secret
 vnstat_update ${versions[$num]}
 
 # 杰佬优化
-# bbrx_install
-# boot_script
-echo 2 | bash <(wget -qO- https://raw.githubusercontent.com/jerry048/Dedicated-Seedbox/main/Tune.sh)
-echo 3 | bash <(wget -qO- https://raw.githubusercontent.com/jerry048/Dedicated-Seedbox/main/Tune.sh)
-echo 4 | bash <(wget -qO- https://raw.githubusercontent.com/jerry048/Dedicated-Seedbox/main/Tune.sh)
+bbrx_install
+boot_script
 
 history -c
 
