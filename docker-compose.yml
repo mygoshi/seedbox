@@ -1,0 +1,23 @@
+version: '3'
+services:
+  vertex-1:
+    image: 'lswl/vertex:stable'
+    container_name: vertex-1
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - /$HOME/vertex:/vertex
+    environment:
+      - TZ=Asia/Shanghai
+
+  # vertex-2:
+  #   image: 'lswl/vertex:stable'
+  #   container_name: vertex-2
+  #   restart: unless-stopped
+  #   ports:
+  #     - '3001:3000'
+  #   volumes:
+  #     - /$HOME/vertex-2:/vertex
+  #   environment:
+  #     - TZ=Asia/Shanghai
